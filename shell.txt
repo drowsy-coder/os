@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Prompt the user to enter four integers
+echo "Enter four integers separated by spaces:"
+read a b c d
+
+# Calculate the sum
+sum=$((a + b + c + d))
+
+# Calculate the average
+average=$(echo "$sum / 4" | bc -l)
+
+# Print the results
+echo "Sum: $sum"
+echo "Average: $average"
+
+-----
+
+#!/bin/bash
+
+# Prompt the user to input principal, rate of interest, and time period
+echo "Enter the principal amount:"
+read P
+echo "Enter the annual interest rate (in percentage):"
+read R
+echo "Enter the time period (in years):"
+read T
+
+# Calculate simple interest
+SI=$(echo "scale=2; $P * $R * $T / 100" | bc)
+
+# Prompt for the number of times interest is compounded per year
+echo "Enter the number of times interest is compounded per year:"
+read N
+
+# Calculate compound interest
+CI=$(echo "scale=2; $P * (1 + $R / (100 * $N)) ^ ($N * $T)" | bc)
+
+# Print the results
+echo "Simple Interest: $SI"
+echo "Compound Interest: $CI"
