@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+        label, input, select {
+            margin: 10px 0;
+            display: block;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        #bookingSummary {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Hotel Booking Form</h2>
+    <form id="bookingForm">
+        <label for="checkinDate">Check-in Date:</label>
+        <input type="date" id="checkinDate" name="checkinDate" required>
+
+        <label for="checkoutDate">Check-out Date:</label>
+        <input type="date" id="checkoutDate" name="checkoutDate" required>
+
+        <label for="guests">Number of Guests:</label>
+        <input type="number" id="guests" name="guests" min="1" max="10" required>
+
+        <label for="roomType">Room Type:</label>
+        <select id="roomType" name="roomType">
+            <option value="single">Single</option>
+            <option value="double">Double</option>
+            <option value="suite">Suite</option>
+        </select>
+
+        <button type="button" onclick="submitBooking()">Book Now</button>
+    </form>
+
+    <div id="bookingSummary"></div>
+</div>
+
+<script>
+function submitBooking() {
+    const form = document.getElementById('bookingForm');
+    const bookingSummary = document.getElementById('bookingSummary');
+    const checkinDate = form.checkinDate.value;
+    const checkoutDate = form.checkoutDate.value;
+    const guests = form.guests.value;
+    const roomType = form.roomType.value;
+
+    bookingSummary.innerHTML = `
+        <h3>Booking Summary</h3>
+        <p>Check-in Date: ${checkinDate}</p>
+        <p>Check-out Date: ${checkoutDate}</p>
+        <p>Number of Guests: ${guests}</p>
+        <p>Room Type: ${roomType.charAt(0).toUpperCase() + roomType.slice(1)}</p>
+    `;
+
+    // Here you would typically also send the booking information to a server
+}
+</script>
+
+</body>
+</html>

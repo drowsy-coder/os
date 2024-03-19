@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { text-align: center; min-width: 500px; }
+form, input:last-child { margin: 10px 20px; }
+.center { margin: 10px 0; display: flex; justify-content: center; }
+</style>
+<script>
+function calc(solarForm) {
+    var table = document.getElementById("performance");
+    var row = table.insertRow(-1); // insert at the end
+    var monthIndex = solarForm.elements["months"].selectedIndex;
+    var monthOptions = solarForm.elements["months"].options;
+    
+    row.insertCell(0).innerHTML = solarForm.elements["latitude"].value;
+    row.insertCell(1).innerHTML = solarForm.elements["panelSlope"].value;
+    row.insertCell(2).innerHTML = solarForm.elements["ratedWatts"].value;
+    row.insertCell(3).innerHTML = monthOptions[monthIndex].text;
+}
+</script>
+</head>
+<body>
+<h2>Solar Collector Performance</h2>
+<form>
+Local Latitude (deg):
+<input name="latitude" id="latitude" type="text" size="5" value="39">
+Panel Slope (deg):
+<input name="panelSlope" id="panelSlope" type="text" size="5" value="20"><br>
+<label for="ratedWatts">Rated Watts per Square Meter:</label>
+<input name="ratedWatts" id="ratedWatts" type="text" size="5" value="133"><br>
+<label for="months">Month:</label>
+<select id="months" name="months">
+<option>Jan</option> <option>Feb</option> <option>Mar</option>
+<option>Apr</option> <option>May</option> <option>Jun</option>
+<option>Jul</option> <option>Aug</option> <option>Sep</option>
+<option>Oct</option> <option>Nov</option> <option>Dec</option>
+</select>
+<input type="button" value="Calculate" onclick="calc(this.form)">
+</form>
+<h3>Calculation Results:</h3>
+<div class="center">
+<table id="performance">
+<tr>
+<th>Latitude &nbsp;</th> <th>Slope &nbsp;</th> <th>Rated Watts &nbsp;</th> <th>Month &nbsp;</th>
+</tr>
+</table>
+</div>
+</body>
+</html>

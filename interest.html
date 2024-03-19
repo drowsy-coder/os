@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compound Interest Calculator</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .result-table { margin-top: 20px; border-collapse: collapse; width: 100%; }
+  .result-table th, .result-table td { border: 1px solid #dddddd; text-align: left; padding: 8px; }
+  .result-table th { background-color: #f2f2f2; }
+</style>
+</head>
+<body>
+
+<h2>Compound Interest Calculator</h2>
+
+<label for="principal">Principal Amount:</label>
+<input type="number" id="principal" value="1000"><br><br>
+
+<label for="rate">Annual Interest Rate (%):</label>
+<input type="number" id="rate" step="0.01" value="5"><br><br>
+
+<label for="years">Number of Years:</label>
+<input type="number" id="years" value="10"><br><br>
+
+<label for="compoundingsPerYear">Compoundings Per Year:</label>
+<input type="number" id="compoundingsPerYear" value="12"><br><br>
+
+<button onclick="calculateCompoundInterest()">Calculate</button>
+
+<table class="result-table" id="resultTable">
+<thead>
+  <tr>
+    <th>Year</th>
+    <th>Interest Earned This Year</th>
+    <th>Total Amount</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+<script>
+function calculateCompoundInterest() {
+  const principal = parseFloat(document.getElementById('principal').value);
+  const rate = parseFloat(document.getElementById('rate').value) / 100;
+  const years = parseInt(document.getElementById('years').value);
+  const compoundingsPerYear = parseInt(document.getElementById('compoundingsPerYear').value);
+  
+  let tbody = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+  tbody.innerHTML = ""; // Clear previous results
+
+  let previousAmount = principal;
+  for (let year = 1; year <= years; year++) {
+    let amount = principal * Math.pow((1 + rate / compoundingsPerYear), compoundingsPerYear * year);
+    let interestEarnedThisYear = amount - previousAmount;
+    let row = tbody.insertRow();
+    let cellYear = row.insertCell(0);
+    let cellInterestEarned = row.insertCell(1);
+    let cellTotalAmount = row.insertCell(2);
+    cellYear.innerHTML = year;
+    cellInterestEarned.innerHTML = "$" + interestEarnedThisYear.toFixed(2);
+    cellTotalAmount.innerHTML = "$" + amount.toFixed(2);
+    previousAmount = amount;
+  }
+}
+</script>
+
+</body>
+</html>
